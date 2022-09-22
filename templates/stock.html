@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+<div class="container">
+    <form action="/stock" method="POST">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"><h2>Enter the stock ID</h2></label>
+          <input type="text" class="form-control" name="stock" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+
+{% if boom == 1 %}
+<div class="container">
+  <div class="alert alert-danger" role="alert">
+    Please Check the Stock Name <a href="/list" class="alert-link">From The list</a>.
+  </div>
+    
+</div>
+    
+{% endif %}
+
+{% if boom > 3 %}
+<div class="container">
+    <div class="alert alert-light" role="alert">
+        <h1>{{stk_name}}</h1>
+      </div>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">SLno</th>
+            <th scope="col">Model Name</th>
+            <th scope="col">RMSE Error</th>
+            <th scope="col">Previous Value</th>
+            <th scope="col">Predicted values</th>
+            <th scope="col">Diffrence</th>
+            <th scope="col">Signal</th>
+
+          </tr>
+        </thead>
+        <tbody>
+            {% for n in name  %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{n}}</td>
+                <td>{{error[loop.index - 1]}}</td>
+                <td>{{lstname}}</td>
+                <td>{{pred[loop.index - 1]}}</td>
+                <td>{{pred[loop.index - 1] - lstname}}</td>
+                {% if pred[loop.index - 1] - lstname > 0 %}
+                <td><span class="badge bg-success">BUY</span></td>
+                {% else %}
+                <td><span class="badge bg-danger">SELL</span></td>  
+                {% endif %}
+                
+              </tr>
+                
+            {% endfor %}
+          
+          
+        </tbody>
+      </table>
+</div>
+
+    
+{% endif %}
+{% endblock body %}
+
+
+

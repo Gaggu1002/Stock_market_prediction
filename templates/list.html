@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+    
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">Stock ID</th>
+            <th scope="col">Stock Name</th>
+            <th scope="col">Industry</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for l in i %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{l}}</td>
+                <td>{{n[loop.index - 1]}}</td>
+                <td>{{indus[loop.index - 1]}}</td>
+              </tr>
+                
+            {% endfor %}
+        
+        </tbody>
+      </table>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock body %}
